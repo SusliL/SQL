@@ -1,0 +1,24 @@
+CREATE TABLE Rewind (id INTEGER PRIMARY KEY, name TEXT, genre TEXT, quantity_sold INTEGER, price INTEGER);
+
+INSERT INTO Rewind VALUES (1,'Hunger Games','dystopian fiction',3,20);
+INSERT INTO Rewind VALUES (2,'La La Land', 'musical',10,25);
+INSERT INTO Rewind VALUES (3,'Get Out','thriller',15, 20);
+INSERT INTO Rewind VALUES (4,'Titanic','Romance',10,15);
+INSERT INTO Rewind VALUES (5,'Forest Gump','Drama',35,23);
+INSERT INTO Rewind VALUES (6,'Clueless','Romantic Comedy',15,16);
+INSERT INTO Rewind VALUES (7,'Good Will Hunting','Drama',27,32);
+INSERT INTO Rewind VALUES (8,'Beetlejuice','Horror',9,15);
+INSERT INTO Rewind VALUES (9,'Legally Blonde','Comedy',22,25);
+INSERT INTO Rewind VALUES (10,'Moonlight','Drama',30,27);
+INSERT INTO Rewind VALUES (11,'Inside Out','Fantasy',50,32);
+INSERT INTO Rewind VALUES (12,'Home Alone','Comedy',80,26);
+INSERT INTO Rewind VALUES (13,'The Grinch','Family',120,29);
+INSERT INTO Rewind VALUES (14,'Fight Club','Action',100,33);
+INSERT INTO Rewind VALUES (15,'IT','Horror',12,23);
+
+--ORDER ITEMS BY PRICE--
+SELECT  * FROM Rewind 
+ORDER BY price; 
+
+-- WHAT IS THE AVERAGE AMOUNT OF MOVIES SOLD -- 
+SELECT AVG(quantity_sold) FROM Rewind;
