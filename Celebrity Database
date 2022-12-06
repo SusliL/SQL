@@ -1,0 +1,106 @@
+/* Create table about the people and what they do here */
+
+CREATE TABLE famouspeople( 
+Id INTEGER PRIMARY KEY,
+Name TEXT,
+Age INTEGER, 
+Marital_status TEXT);
+
+INSERT INTO famouspeople VALUES (1,'Johnny Depp', 59, 'Divorced');
+INSERT INTO famouspeople VALUES (2,'Tom Hanks', 66, 'Married');
+INSERT INTO famouspeople VALUES (3,'Sandra Bullok', 58, 'Single');
+INSERT INTO famouspeople VALUES (4,'Stephen King', 75, 'Married');
+INSERT INTO famouspeople VALUES (5,'J.K Rowling', 57, 'Married');
+INSERT INTO famouspeople VALUES (6,'Tom Holland', 26, 'Single');
+INSERT INTO famouspeople VALUES (7,'Letitia Wright', 29, 'Single');
+INSERT INTO famouspeople VALUES (8,'Sophie Turner', 26, 'Married');
+
+
+
+CREATE TABLE work  (
+Id INTEGER PRIMARY KEY, 
+Occupation TEXT, 
+Famous_work TEXT, 
+Retired TEXT);
+
+INSERT INTO work VALUES(1, 'Actor', 'Pirates of the Caribbean', 'No');
+INSERT INTO work VALUES(2, 'Actor', 'Forrest Gump', 'No');
+INSERT INTO work VALUES(3, 'Actor', 'Ms. Congeniality', 'No');
+INSERT INTO work VALUES(4, 'Author', 'The Shining', 'No');
+INSERT INTO work VALUES(5, 'Author', 'Harry Potter', 'No');
+INSERT INTO work VALUES(6, 'Actor', 'Spider Man', 'No');
+INSERT INTO work VALUES(7, 'Actor', 'Black Panther', 'No');
+INSERT INTO work VALUES(8, 'Actor', 'Game of Thrones', 'No');
+
+CREATE TABLE status(
+Id INTEGER PRIMARY KEY, 
+Awards TEXT, 
+Networth INTEGER, 
+Scandals TEXT); 
+
+INSERT INTO status VALUES (1, 'Yes', 150000000, 'Yes');
+INSERT INTO status VALUES (2, 'Yes', 400000000, 'Yes');
+INSERT INTO status VALUES (3, 'Yes', 250000000, 'No');
+INSERT INTO status VALUES (4, 'Yes', 500000000, 'No');
+INSERT INTO status VALUES (5, 'Yes', 820000000, 'Yes');
+INSERT INTO status VALUES (6, 'Yes', 25000000, 'No');
+INSERT INTO status VALUES (7, 'Yes', 4000000, 'Yes');
+INSERT INTO status VALUES (8, 'Yes', 10000000, 'No');
+
+--What project are the actors/authors most known for? -- 
+
+SELECT fame.name, work.famous_work FROM famouspeople AS fame
+INNER JOIN work 
+ON fame.id = work.id;
+
+-- Is there a connection between age and success? -- 
+
+SELECT fame.age, status.awards, status.networth FROM famouspeople AS fame 
+INNER JOIN status
+ON fame.id = status.id
+ORDER BY networth DESC; 
+
+SELECT fame.age, SUM(status.networth) AS networth_sum from famouspeople AS fame 
+INNER JOIN status 
+ON fame.id = status.id 
+WHERE AGE > 50; 
+
+SELECT fame.age, SUM(status.networth)AS networth_sum from famouspeople AS fame 
+INNER JOIN status 
+ON fame.id = status.id 
+WHERE AGE <30;
+
+--Is there a connection  between age and scandals? -- 
+SELECT fame.age, status.scandals From famouspeople AS fame 
+INNER JOIN status 
+ON fame.id = status.id 
+Order BY age;
+
+-- Who is the person with the higest networth? -- 
+SELECT fame.name, MAX(status.networth)AS highest_networth FROM famouspeople AS fame 
+JOIN status 
+ON fame.id = status.id;
+
+-- What is the average networth of all actors? -- 
+SELECT fame.name, ROUND(AVG(status.networth), 0) AS 
+average_networth FROM famouspeople AS fame 
+JOIN status 
+ON fame.id = status.id 
+JOIN work 
+on status.id = work.id 
+WHERE occupation = 'Actor';
+
+--Who is the youngest actor? -- 
+SELECT MIN(age) FROM famouspeople; 
+
+SELECT name, age FROM famouspeople 
+WHERE age = 26; 
+
+
+
+
+
+
+
+
+
